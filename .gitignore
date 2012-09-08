@@ -1,0 +1,4 @@
+*.pyc
+
+wordrobber_django/wordrobe.db
+
