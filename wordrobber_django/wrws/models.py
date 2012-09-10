@@ -15,6 +15,7 @@ def achievement_file_name(instance, filename):
 
 class Player(models.Model):
     user = models.OneToOneField(User)
+    name = models.CharField(max_length=100)
     about = models.TextField()
     avatar = models.ImageField(upload_to=avatar_file_name)
         
@@ -26,7 +27,7 @@ class Game(models.Model):
     icon = models.ImageField(upload_to=game_file_name)
     description = models.TextField()
     help_text = models.TextField(blank=True)
-    questions_per_drawer = models.IntegerField()
+    drawer_size = models.IntegerField()
     
     def __unicode__(self):
         return self.name

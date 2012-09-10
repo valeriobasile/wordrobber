@@ -6,9 +6,7 @@ from django.contrib.auth.models import User
 def load_test_data(request):
     # delete existing objects, except admin user
     Player.objects.all().delete()
-           
-    User.objects.exclude(username='admin').delete()
-    
+    User.objects.exclude(is_superuser=True).delete()
     Choice.objects.all().delete()
     Question.objects.all().delete()
     Game.objects.all().delete()
@@ -24,6 +22,7 @@ def load_test_data(request):
     for i in range(n_players):
         user = User()
         user.username = "user{0}".format(i)
+        user.set_password('{0}'.format(i))
         user.save()
         
         player = Player()
@@ -33,7 +32,9 @@ def load_test_data(request):
         
     for i in range(n_games):
         game = Game()
-        game.name = "Game {0}".format(i)
+        game.name = "Game{0}".format(i)
+        game.description = "Description of game {0}".format(i)
+        game.help_text = "Help text of game{0}".format(i)
         game.drawer_size = drawer_size
         game.save()
         
